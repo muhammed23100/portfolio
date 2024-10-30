@@ -19,6 +19,64 @@ function downloadCV() {
             });
         });
     });
+    // script.js
+const hamburger = document.querySelector(".hamburger");
+const navMenu = document.querySelector("#navMenu");
+const dropdownButton = document.querySelector("#ctaButton");
+const dropdownMenu = document.querySelector("#dropdownMenu");
+let lastScroll = 0;
+
+// Toggle mobile menu
+hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
+    navMenu.classList.toggle("active");
+});
+
+// Close mobile menu when clicking a link
+document.querySelectorAll("#navMenu a").forEach(n => n.addEventListener("click", () => {
+    hamburger.classList.remove("active");
+    navMenu.classList.remove("active");
+}));
+
+// Toggle dropdown menu
+function toggleDropdown() {
+    dropdownMenu.classList.toggle("active");
+}
+
+// Close dropdown when clicking outside
+document.addEventListener("click", (event) => {
+    if (!event.target.matches('#ctaButton') && !event.target.closest('.dropdown-content')) {
+        dropdownMenu.classList.remove("active");
+    }
+});
+
+// Hide/show navbar on scroll
+window.addEventListener("scroll", () => {
+    const currentScroll = window.pageYOffset;
+    const navbar = document.querySelector("nav");
+
+    if (currentScroll > lastScroll && currentScroll > 50) {
+        navbar.style.transform = "translateY(-100%)";
+    } else {
+        navbar.style.transform = "translateY(0)";
+    }
+    lastScroll = currentScroll;
+});
+
+// Download CV function
+function downloadCV() {
+    // Replace this with your actual CV download logic
+    console.log("Downloading CV...");
+    // Example:
+    // window.location.href = "path/to/your/cv.pdf";
+}
+    function toggleMobileMenu(x) {
+        x.classList.toggle("change"); // Apply the "change" class to animate the hamburger
+    
+        var nav = document.querySelector('nav ul'); // Select the navigation menu
+        nav.classList.toggle('active'); // Toggle visibility of the mobile menu
+    }
+    
 
     // Intersection Observer for animating elements when they come into view
     const animatedElements = document.querySelectorAll('.animate-text, .animate-text-delay, .animate-button, .animate-image, .animate-card');
@@ -36,6 +94,7 @@ function downloadCV() {
         el.style.animationPlayState = 'paused';
         observer.observe(el);
     });
+    
 
     // Add active class to navigation links based on scroll position
     const sections = document.querySelectorAll('section');
